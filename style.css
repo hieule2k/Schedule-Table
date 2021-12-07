@@ -8,13 +8,13 @@
   height: 100vh;
   width: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 }
 
-.subject-container {
-  padding: 10px;
+#subject-container {
+  margin-left: -13%;
 }
 
 .subject__name {
@@ -23,6 +23,7 @@
   text-align: center;
   border-radius: 5px;
   cursor: pointer;
+  text-transform: uppercase;
 }
 
 .subject__name:nth-child(1) {
@@ -48,4 +49,63 @@
 }
 .subject__name:nth-child(8) {
   background-color: #42a4f5;
+}
+
+/* table */
+.table-container {
+  min-height: 750px;
+  display: flex;
+  background: linear-gradient(#ddd6f3, #faaca8);
+  padding: 10px;
+  margin-bottom: 20px;
+  flex-direction: column;
+  max-width: 833px;
+}
+
+.day-container {
+  display: flex;
+}
+
+.day {
+  display: flex;
+  width: 100px;
+  border: solid 1px #fff;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+  /* min-width: 100px; */
+}
+
+#corner {
+  border: none;
+}
+
+.time-container {
+  display: flex;
+}
+
+.dragField {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.time {
+  min-width: 110px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #000;
+  margin-left: -9px;
+  border-left: none;
+}
+
+.subject {
+  display: flex;
+  background-color: #fff;
+  height: 100px;
+  width: 100px;
+
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #000;
 }
