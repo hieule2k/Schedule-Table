@@ -43,6 +43,54 @@
   document.querySelector(".day").setAttribute("id", "corner");
 })();
 
+(function () {
+  const subjectsField = [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+  ];
+
+  for (let i = 0; i < subjectsField.length; i++) {
+    let subjectField = subjectsField[i];
+    const subjectFieldTextNode = document.createTextNode(subjectField);
+    const div = document.createElement("div");
+    div.setAttribute("class", "subject");
+    div.setAttribute("ondrop", "drop(event)");
+    div.setAttribute("ondragover", "allowDrop(event)");
+    div.appendChild(subjectFieldTextNode);
+    document.querySelector(".dragField").appendChild(div);
+  }
+
+  for (let i = 0; i < subjectsField.length; i++) {
+    let subjectField = subjectsField[i];
+    const subjectFieldTextNode = document.createTextNode(subjectField);
+    const div = document.createElement("div");
+    div.setAttribute("class", "subject");
+    div.setAttribute("ondrop", "drop(event)");
+    div.setAttribute("ondragover", "allowDrop(event)");
+    div.appendChild(subjectFieldTextNode);
+    document.getElementsByClassName("dragField")[1].appendChild(div);
+  }
+})();
+
 function allowDrop(event) {
   event.preventDefault();
 }
