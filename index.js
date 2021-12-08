@@ -1,135 +1,49 @@
 (function () {
   const subjectList = [
-    "Math",
-    "history",
-    "literature",
-    "English",
-    "Biology",
-    "Chemistry",
-    "Physics",
-    "Physical education",
+    { subject: "Math", id: "math" },
+    { subject: "history", id: "history" },
+    { subject: "literature", id: "literature" },
+    { subject: "english", id: "english" },
+    { subject: "biology", id: "biology" },
+    { subject: "Chemistry", id: "chemistry" },
+    { subject: "Physics", id: "physics" },
+    { subject: "Physical education", id: "physical eduaction" },
   ];
 
   for (let i = 0; i < subjectList.length; i++) {
-    let subject = subjectList[i];
-    const subjectTextNode = document.createTextNode(subject);
-    const Div = document.createElement("div");
-    Div.setAttribute("class", "subject__name");
-    Div.appendChild(subjectTextNode);
-    document.getElementById("subject-container").appendChild(Div);
-  }
-})();
-
-(function () {
-  const daysList = [
-    "",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ];
-
-  for (let i = 0; i < daysList.length; i++) {
-    let day = daysList[i];
-    const dayTextNode = document.createTextNode(day);
-    const Div = document.createElement("div");
-    Div.setAttribute("class", "day");
-    Div.appendChild(dayTextNode);
-    document.querySelector(".day-container").appendChild(Div);
-  }
-  document.querySelector(".day").setAttribute("id", "corner");
-})();
-
-(function () {
-  const subjectsField = [
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-  ];
-
-  for (let i = 0; i < subjectsField.length; i++) {
-    let subjectField = subjectsField[i];
-    const subjectFieldTextNode = document.createTextNode(subjectField);
+    let sub = subjectList[i];
+    const subjectTextNode = document.createTextNode(sub.subject);
     const div = document.createElement("div");
-    div.setAttribute("class", "subject");
-    div.setAttribute("ondrop", "drop(event)");
-    div.setAttribute("ondragover", "allowDrop(event)");
-    div.appendChild(subjectFieldTextNode);
-    document.querySelector(".dragField").appendChild(div);
-  }
-
-  for (let i = 0; i < subjectsField.length; i++) {
-    let subjectField = subjectsField[i];
-    const subjectFieldTextNode = document.createTextNode(subjectField);
-    const div = document.createElement("div");
-    div.setAttribute("class", "subject");
-    div.setAttribute("ondrop", "drop(event)");
-    div.setAttribute("ondragover", "allowDrop(event)");
-    div.appendChild(subjectFieldTextNode);
-    document.getElementsByClassName("dragField")[1].appendChild(div);
+    div.setAttribute("class", "subject__name");
+    div.appendChild(subjectTextNode);
+    document.getElementById("subject-container").appendChild(div);
+    div.setAttribute("id", sub.id);
   }
 })();
 
-function allowDrop(event) {
-  event.preventDefault();
-}
-
-function drag(event) {
-  event.dataTransfer.setData("text", event.target.id);
-}
-
-function drop(event) {
-  event.preventDefault();
-  var data = event.dataTransfer.getData("text");
-  event.target.appendChild(document.getElementById(data));
-}
-
-document.getElementsByClassName("subject__name")[0].setAttribute("id", "math");
-document
-  .getElementsByClassName("subject__name")[1]
-  .setAttribute("id", "history");
-document
-  .getElementsByClassName("subject__name")[2]
-  .setAttribute("id", "literature");
-document
-  .getElementsByClassName("subject__name")[3]
-  .setAttribute("id", "english");
-document
-  .getElementsByClassName("subject__name")[4]
-  .setAttribute("id", "biology");
-document
-  .getElementsByClassName("subject__name")[5]
-  .setAttribute("id", "chemistry");
-document
-  .getElementsByClassName("subject__name")[6]
-  .setAttribute("id", "physics");
-document
-  .getElementsByClassName("subject__name")[7]
-  .setAttribute("id", "physical eduaction");
-
-var subjects = document.getElementsByClassName("subject__name");
-for (let i = 0; i < subjects.length; i++) {
-  subjects[i].setAttribute("draggable", "true");
-  subjects[i].setAttribute("ondragstart", "drag(event)");
+var array = [
+  [
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+    "sunday",
+  ],
+  ["", "", "", "", "", "", ""],
+  ["", "", "", "", "", "", ""],
+  ["", "", "", "", "", "", ""],
+  ["", "", "", "", "", "", ""],
+  ["", "", "", "", "", "", ""],
+  ["", "", "", "", "", "", ""],
+];
+for (let i = 0; i < array.length; i++) {
+  var tr = document.createElement("tr");
+  document.getElementById("my-row").appendChild(tr);
+  for (let j = 0; j < array[i].length; j++) {
+    var tdElement = document.createElement("td");
+    tdElement.innerHTML = array[i][j];
+    tr.appendChild(tdElement);
+  }
 }
