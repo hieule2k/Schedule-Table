@@ -5,16 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/responsive.css">
+    <link rel="stylesheet" href="/fontawesome-free-5.15.4-web/css/all.min.css">
     <title>schedule table</title>
 </head>
-<body>
+<body>     
     
     <div class="schedule-container">
-        <div id="subject-container"></div> 
+        <div id="subject-container">
+            <h2 id="subject-title">Subject List</h2>
+            <div id="father-div"></div>
+            <form action="" id="form">
+                <h2>Add subject</h2>
+            </form>
+        </div> 
         <div class="table-container">
+            <h2>Schedule Table </h2>
+            <button id="export" onclick=download()>export JSON</button>
+
             <table id="my-row">
  
             </table>
+
 
         </div>  
 
