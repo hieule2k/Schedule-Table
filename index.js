@@ -1,326 +1,129 @@
-const subjectList = [
-  { subject: "Math", id: "math", class: "math__color", idDiv: "mathDiv" },
+const subjectLists = [
+  { subject: "Math", id: "math", class: "math__color", divId: "mathZone" },
   {
     subject: "history",
     id: "history",
     class: "history__color",
-    idDiv: "historyDiv",
+    divId: "historyZone",
   },
   {
     subject: "literature",
     id: "literature",
     class: "literature__color",
-    idDiv: "literatureDiv",
+    divId: "literatureZone",
   },
   {
     subject: "english",
     id: "english",
     class: "english__color",
-    idDiv: "englishDiv",
+    divId: "englishZone",
   },
   {
     subject: "biology",
     id: "biology",
     class: "biology__color",
-    idDiv: "biologyDiv",
+    divId: "biologyZone",
   },
   {
     subject: "Chemistry",
     id: "chemistry",
     class: "chemistry__color",
-    idDiv: "chemistryDiv",
+    divId: "chemistryZone",
   },
   {
     subject: "Physics",
     id: "physics",
     class: "physics__color",
-    idDiv: "physicsDiv",
+    divId: "physicsZone",
   },
   {
     subject: "Physical education",
     id: "physicalEducation",
     class: "physicalEducation__color",
-    idDiv: "physicalEducationDiv",
+    divId: "physicalEducationZone",
   },
 ];
 
-for (let i = 0; i < subjectList.length; i++) {
-  let sub = subjectList[i];
-  const subjectTextNode = document.createTextNode(sub.subject);
-  const superDiv = document.createElement("div");
-  const div = document.createElement("div");
-  div.setAttribute("class", "subject__name");
-  div.appendChild(subjectTextNode);
-  div.setAttribute("id", sub.id);
-  div.classList.add(sub.class);
-  superDiv.setAttribute("id", sub.idDiv);
-  superDiv.appendChild(div);
-  document.getElementById("father-div").appendChild(superDiv);
-}
-
-var array = [
-  [
-    "monday",
-    "tuesday",
-    "wednesday",
-    "thursday",
-    "friday",
-    "saturday",
-    "sunday",
-  ],
-  ["", "", "", "", "", "", ""],
-  ["", "", "", "", "", "", ""],
-  ["", "", "", "", "", "", ""],
-  ["", "", "", "", "", "", ""],
-  ["", "", "", "", "", "", ""],
-  ["", "", "", "", "", "", ""],
-];
-
-// function getSchedule() {
-//   return JSON.parse(localStorage.getItem("array"));
-// }
-
-function drawSchedule(array) {
-  for (let i = 0; i < array.length; i++) {
-    var tr = document.createElement("tr");
-    document.getElementById("my-row").appendChild(tr);
-    for (let j = 0; j < array[i].length; j++) {
-      var tdElement = document.createElement("td");
-      if (array[i][j] && typeof array[i][j] === "object") {
-        var tdElementTextNode = document.createTextNode(array[i][j].subject);
-        var daddy = document.createElement("div");
-        daddy.setAttribute("class", "subject-name--fit");
-        daddy.classList.add(array[i][j].class);
-        daddy.appendChild(tdElementTextNode);
-        tdElement.appendChild(daddy);
-      } else {
-        tdElement.innerHTML = array[i][j];
-      }
-      tr.appendChild(tdElement);
-      var button = document.createElement("button");
-      tdElement.prepend(button);
-      button.setAttribute("class", "close-button");
-
-      if (tdElement.contains(daddy)) {
-        button.classList.add("close-button--hover");
-        const removeOndrops = document.querySelectorAll(".close-button--hover");
-        for (let i = 0; i < removeOndrops.length; i++) {
-          var removeOndrop = removeOndrops[i];
-          removeOndrop.parentElement.removeAttribute("ondrop");
-          removeOndrop.parentElement.removeAttribute("ondragover");
-        }
-      }
-
-      // function removeElementFromArray() {
-      //   var rows = document.getElementById("my-row").getElementsByTagName("tr");
-      //   for (let i = 0; i < rows.length; i++) {
-      //     var row = rows[i];
-      //     var cells = row.childNodes;
-      //     for (let j = 0; j < cells.length; j++) {
-      //       var cell = cells[j];
-      //       if (cell === target) {
-      //         array[i][j] = "";
-      //       }
-      //     }
-      //   }
-      // }
-      function remover(elem) {
-        elem.target.nextElementSibling.remove();
-        elem.target.classList.remove("close-button--hover");
-        elem.target.parentElement.setAttribute("ondrop", "dropIn(event)");
-        elem.target.parentElement.setAttribute(
-          "ondragover",
-          "allowDrop(event)"
-        );
-        // removeElementFromArray();
-      }
-
-      var removeSubject = document.querySelectorAll(".close-button--hover");
-      for (let i = 0; i < removeSubject.length; i++) {
-        removeSubject[i].addEventListener("click", remover);
-      }
-    }
-  }
-}
-
-// function removeElementFromArray(event) {
-//   var rows = document.getElementById("my-row").getElementsByTagName("tr");
-//   for (let i = 0; i < rows.length; i++) {
-//     var row = rows[i];
-//     var cells = row.childNodes;
-//     for (let j = 0; j < cells.length; j++) {
-//       var cell = cells[j];
-//       if (cell === event.target) {
-//         array[i][j] = "";
+// var dragHelper = {
+//   tableId: null,
+//   setTableId: function (id) {
+//     this.tableId = id;
+//   },
+//   addElementIntoArr: function (event) {
+//     var days = Object.keys(array); //days from monday to sunday
+//     var rows = document.getElementById("my-table").getElementsByTagName("tr");
+//     for (let i = 1; i < rows.length; i++) {
+//       var row = rows[i];
+//       var cells = row.children;
+//       for (let j = 0; j < cells.length; j++) {
+//         var cell = cells[j];
+//         if (cell === event.target) {
+//           var subject = {
+//             subject: data,
+//             id: data,
+//             class: data + "__color",
+//             divId: data + "Div",
+//           };
+//           array[days[j]][i - 1] = subject;
+//           break;
+//         }
 //       }
 //     }
-//   }
-// }
+//   },
+// };
 
-function addSubjectToScheduleUI(target, data) {
-  var dataId = document.getElementById(data);
-  target.appendChild(dataId);
-  dataId.classList.add("subject-name--fit");
-  dataId.classList.remove("subject__name");
-  dataId.parentElement.removeAttribute("ondrop");
-  dataId.parentElement.removeAttribute("ondragover");
-  var copy = dataId;
-  var cln = copy.cloneNode(true);
-  cln.classList.add("subject__name");
-  cln.classList.remove("subject-name--fit");
-  document.getElementById(data + "Div").prepend(cln);
+var array = {
+  monday: null,
+  tuesday: null,
+  wednesday: null,
+  thursday: null,
+  friday: null,
+  saturday: null,
+  sunday: null,
+};
+const slot = 6;
 
-  var remove = document.getElementsByClassName("subject-name--fit");
-  for (let i = 0; i < remove.length; i++) {
-    remove[i].removeAttribute("id");
-    remove[i].removeAttribute("draggable");
-    remove[i].removeAttribute("ondragstart");
+creatSubjectList();
+
+generateArray(slot);
+
+drawSchedule();
+
+makeSubjectDraggable();
+
+makeCellsDropable();
+
+disableDropOnfirstRow();
+
+function creatSubjectList() {
+  for (let i = 0; i < subjectLists.length; i++) {
+    var subjectList = subjectLists[i];
+    const subjectTextNode = document.createTextNode(subjectList.subject);
+    const subjectZone = document.createElement("div");
+    const externalSubject = document.createElement("div");
+    const abbr = document.createElement("abbr");
+    abbr.setAttribute("title", subjectList.subject);
+    abbr.appendChild(subjectTextNode);
+    externalSubject.appendChild(abbr);
+    externalSubject.setAttribute("class", "external-subject");
+    externalSubject.setAttribute("id", subjectList.id);
+    externalSubject.classList.add(subjectList.class);
+    subjectZone.setAttribute("id", subjectList.divId);
+    subjectZone.appendChild(externalSubject);
+    document.getElementById("subject-zone").appendChild(subjectZone);
   }
 }
 
-function creatTable() {
-  // var schedule = getSchedule();
-  // if (schedule) {
-  //   array = schedule;
-  // }
-  drawSchedule(array);
-}
-creatTable();
-function allowDrop(event) {
-  event.preventDefault();
-}
-
-function drag(event) {
-  event.dataTransfer.setData("text", event.target.id);
-}
-
-const subjectArray = [];
-
-function dropIn(event) {
-  event.preventDefault(event);
-  var data = event.dataTransfer.getData("text");
-
-  var target = event.target;
-  addSubjectToScheduleUI(target, data);
-
-  function addElementToArray() {
-    var rows = document.getElementById("my-row").getElementsByTagName("tr");
-    for (let i = 0; i < rows.length; i++) {
-      var row = rows[i];
-      var cells = row.childNodes;
-      for (let j = 0; j < cells.length; j++) {
-        var cell = cells[j];
-        if (cell === event.target) {
-          var subject = {
-            subject: data,
-            id: data,
-            class: data + "__color",
-            idDiv: data + "Div",
-          };
-          array[i][j] = subject;
-        }
-      }
-    }
-  }
-
-  // function removeElementFromArray() {
-  //   var rows = document.getElementById("my-row").getElementsByTagName("tr");
-  //   for (let i = 0; i < rows.length; i++) {
-  //     var row = rows[i];
-  //     var cells = row.childNodes;
-  //     for (let j = 0; j < cells.length; j++) {
-  //       var cell = cells[j];
-
-  //       if (cell === event.target) {
-  //         array[i][j] = "";
-  //       }
-  //     }
-  //   }
-  // }
-
-  addElementToArray();
-
-  var addButtonClass = document.querySelectorAll(".subject-name--fit");
-  for (let i = 0; i < addButtonClass.length; i++) {
-    addButtonClass[i].parentElement
-      .querySelector(".close-button")
-      .classList.add("close-button--hover");
-  }
-
-  // remove subject in table
-  function remover(elem) {
-    elem.target.nextElementSibling.remove();
-    elem.target.classList.remove("close-button--hover");
-    elem.target.parentElement.setAttribute("ondrop", "dropIn(event)");
-    elem.target.parentElement.setAttribute("ondragover", "allowDrop(event)");
-    // removeElementFromArray();
-  }
-
-  //remover subject in table by click button
-  var removeSubject = document.querySelectorAll(".close-button--hover");
-  for (let i = 0; i < removeSubject.length; i++) {
-    removeSubject[i].addEventListener("click", remover);
-  }
-
-  var getAllTd = document.querySelectorAll("td");
-  for (let i = 0; i < 7; i++) {
-    getAllTd[i]
-      .querySelector(".close-button")
-      .classList.add("delete-all-column");
-  }
-  var closeColumn = document.querySelectorAll(".delete-all-column");
-  for (let i = 0; i < closeColumn.length; i++) {
-    closeColumn[i].addEventListener("click", removeColumn);
-  }
-}
-
-var subjectListz = document.querySelectorAll(".subject__name");
-for (let i = 0; i < subjectListz.length; i++) {
-  subjectListz[i].setAttribute("draggable", "true");
-  subjectListz[i].setAttribute("ondragstart", "drag(event)");
-}
-
-function setOndropAtribute() {
-  var cells = document.querySelectorAll("td");
-  for (let i = 0; i < cells.length; i++) {
-    let cell = cells[i];
-    if (cell.getElementsByTagName("div").length === 0) {
-      cell.setAttribute("ondrop", "dropIn(event)");
-      cell.setAttribute("ondragover", "allowDrop(event)");
+function generateArray(slot) {
+  var keys = Object.keys(array);
+  for (i = 0; i < keys.length; i++) {
+    var key = keys[i];
+    array[key] = [];
+    for (j = 0; j < slot; j++) {
+      array[key].push(null);
     }
   }
 }
-// creatTable();
-setOndropAtribute();
-
-function removeDropOnDays() {
-  var hehe = document.querySelectorAll("td");
-  for (let i = 0; i < 7; i++) {
-    hehe[i].removeAttribute("ondrop");
-    hehe[i].removeAttribute("ondragover");
-  }
-}
-removeDropOnDays();
-
-// remove subject in a column
-function removeColumn(elem) {
-  let header = array[0];
-  let removeColumnIndex = header.indexOf(elem.target.parentElement.textContent);
-
-  let rowList = document.querySelectorAll("tr");
-
-  for (let i = 1; i < rowList.length; i++) {
-    let row = rowList[i].childNodes;
-    data = row[removeColumnIndex].childNodes[1];
-    if (data) {
-      data.previousSibling.classList.remove("close-button--hover");
-      data.remove();
-      setOndropAtribute();
-      removeDropOnDays();
-    }
-  }
-}
-
 // generate new subject
 (function () {
   const form = document.createElement("div");
@@ -338,19 +141,20 @@ function removeColumn(elem) {
   label2.setAttribute("class", "add-label");
   inputColor.setAttribute("type", "color");
   inputColor.setAttribute("id", "color");
+  inputColor.setAttribute("value", "#F79191");
+  inputColor.setAttribute("placeholder", "pick color");
   input.setAttribute("id", "subject");
+  input.setAttribute("placeholder", "Please enter a subject ");
 
-  input.setAttribute("placeholder", "please enter a subject ");
   form.appendChild(label);
   form.appendChild(input);
   form2.appendChild(label2);
   form2.appendChild(inputColor);
 
-  document.querySelector("#form").appendChild(form);
-  document.querySelector("#form").appendChild(form2);
+  document.querySelector("#div-form").appendChild(form);
+  document.querySelector("#div-form").appendChild(form2);
+
   document.querySelector("#form").appendChild(button);
-  document.querySelectorAll(".add-label")[0].textContent = "Subject";
-  document.querySelectorAll(".add-label")[1].textContent = "Choose color";
   document.getElementById("btn").textContent = "Add";
   function generateNewSubject(subjectName) {
     const subject = document.getElementById("subject").value;
@@ -361,7 +165,12 @@ function removeColumn(elem) {
     const objectColor = {
       backgroundColor: "background-color:" + color + ";",
     };
-    div.setAttribute("class", "subject__name");
+    const abbr = document.createElement("abbr");
+    abbr.setAttribute("title", subject);
+    abbr.appendChild(subjectTextNode);
+    div.appendChild(abbr);
+
+    div.setAttribute("class", "external-subject");
     div.classList.add(subjectName + "__color");
     div.setAttribute("style", objectColor.backgroundColor);
 
@@ -370,26 +179,223 @@ function removeColumn(elem) {
     div.setAttribute("ondragstart", "drag(event)");
     divId.setAttribute("id", subjectName + "Div");
 
-    div.appendChild(subjectTextNode);
-    divId.appendChild(div);
+    divId.prepend(div);
 
     return divId;
   }
+
   btn.addEventListener("click", function (event) {
     const subject = document.getElementById("subject");
     event.preventDefault();
-    var alert = "please fill out the blank";
     if (!subject.value.trim()) {
-      alert;
+      alert("please fill out the blank");
     } else {
       document
-        .getElementById("father-div")
+        .getElementById("subject-zone")
         .appendChild(generateNewSubject(subject.value));
+      document.getElementById("form").reset();
     }
   });
 })();
 
-// addElementToArray();
+function drawSchedule() {
+  var days = Object.keys(array); //days =  days from monday to sunday
+  var lessons = Object.values(array); // 7 array each have 6 nulls
+
+  var tr = document.createElement("tr");
+  for (let i = 0; i < days.length; i++) {
+    var day = days[i]; //  day from monday to sunday
+    var dayTextNode = document.createTextNode(day);
+    var daytime = document.createElement("td");
+    daytime.appendChild(dayTextNode);
+    var icon = document.createElement("i");
+    icon.setAttribute("class", "fas fa-window-close");
+    daytime.prepend(icon);
+    tr.appendChild(daytime);
+  }
+  document.getElementById("my-table").appendChild(tr);
+
+  for (let i = 0; i < lessons[0].length; i++) {
+    var tr = document.createElement("tr");
+
+    for (let j = 0; j < lessons.length; j++) {
+      var day = days[j]; //42 days from monday to sunday
+      var tdInDay = document.createElement("td");
+      var lessonTextNode = document.createTextNode(array[day][i] || "");
+      tdInDay.appendChild(lessonTextNode);
+      tr.appendChild(tdInDay);
+    }
+    document.getElementById("my-table").appendChild(tr);
+  }
+}
+
+// add modifier to subject in table and clone a subject
+function cloneAndSetExternalStyle(target, data) {
+  var dataId = document.getElementById(data);
+
+  var copy = dataId;
+  var cloneSubject = copy.cloneNode(true);
+
+  cloneSubject.classList.remove("external-subject");
+  cloneSubject.classList.add("internal-subject");
+
+  var icon = document.createElement("i");
+  icon.setAttribute("class", "fas fa-window-close close-button");
+
+  target.appendChild(icon);
+  target.appendChild(cloneSubject);
+  cloneSubject.parentElement.removeEventListener("drop", dropIn);
+  cloneSubject.parentElement.removeEventListener("dragover", allowDrop);
+  cloneSubject.classList.add(data + "__color");
+
+  var remove = document.getElementsByClassName("internal-subject");
+  for (let i = 0; i < remove.length; i++) {
+    remove[i].removeAttribute("id");
+    remove[i].removeAttribute("draggable");
+    remove[i].removeEventListener("dragstart", drag);
+  }
+}
+
+function makeSubjectDraggable() {
+  var externalSubject = document.querySelectorAll(".external-subject");
+  for (let i = 0; i < externalSubject.length; i++) {
+    externalSubject[i].setAttribute("draggable", "true");
+    externalSubject[i].addEventListener("dragstart", drag);
+  }
+}
+
+function allowDrop(event) {
+  event.preventDefault();
+}
+
+function drag(event) {
+  event.dataTransfer.setData("text", event.target.id);
+}
+
+function dropIn(event) {
+  event.preventDefault(event);
+  var data = event.dataTransfer.getData("text");
+  console.log(event);
+  var target = event.target;
+  cloneAndSetExternalStyle(target, data);
+
+  // update subject to Json
+  var days = Object.keys(array); //days from monday to sunday
+  var rows = document.getElementById("my-table").getElementsByTagName("tr");
+  for (let i = 1; i < rows.length; i++) {
+    var row = rows[i];
+    var cells = row.children;
+    for (let j = 0; j < cells.length; j++) {
+      var cell = cells[j];
+      if (cell === event.target) {
+        var subject = {
+          subject: data,
+          id: data,
+          class: data + "__color",
+          divId: data + "Div",
+        };
+        array[days[j]][i - 1] = subject;
+        break;
+      }
+    }
+  }
+  //add remove event in a cell
+  var closeButtons = document.querySelectorAll(".close-button");
+  for (let i = 0; i < closeButtons.length; i++) {
+    closeButtons[i].addEventListener("click", removeSubject);
+  }
+  //add remove column event
+  const getAllTd = document.querySelectorAll("td");
+  for (let i = 0; i < 7; i++) {
+    getAllTd[i].firstChild.classList.add("delete-all-column");
+  }
+
+  var closeColumn = document.querySelectorAll(".delete-all-column");
+  for (let i = 0; i < closeColumn.length; i++) {
+    closeColumn[i].addEventListener("click", removeCol);
+  }
+}
+
+function removeSubject(elem) {
+  var tdWithSubject = elem.target;
+
+  //update json after remove subject
+  var days = Object.keys(array);
+  var rows = document.getElementById("my-table").getElementsByTagName("tr");
+  for (let i = 1; i < rows.length; i++) {
+    var row = rows[i];
+    var cells = row.children;
+
+    for (let j = 0; j < cells.length; j++) {
+      var cell = cells[j];
+      if (cell === elem.target.parentElement) {
+        array[days[j]][i - 1] = null;
+        break;
+      }
+    }
+  }
+
+  tdWithSubject.nextElementSibling.remove();
+  tdWithSubject.parentElement.addEventListener("drop", dropIn);
+  tdWithSubject.parentElement.addEventListener("dragover", allowDrop);
+  tdWithSubject.remove();
+}
+
+function makeCellsDropable() {
+  var cells = document.querySelectorAll("td");
+  for (let i = 0; i < cells.length; i++) {
+    let cell = cells[i];
+
+    if (cell.getElementsByTagName("div").length === 0) {
+      cell.addEventListener("drop", dropIn);
+      cell.addEventListener("dragover", allowDrop);
+    }
+  }
+}
+
+function disableDropOnfirstRow() {
+  var td = document.querySelectorAll("td");
+  for (let i = 0; i < 7; i++) {
+    td[i].removeEventListener("drop", dropIn);
+    td[i].removeEventListener("dragover", allowDrop);
+  }
+}
+// remove subject in a column
+function removeCol(elem) {
+  let header = Object.keys(array);
+  let tdIndex = header.indexOf(elem.target.parentElement.textContent);
+
+  let rowList = document.querySelectorAll("tr");
+
+  for (let i = 1; i < rowList.length; i++) {
+    let row = rowList[i].childNodes;
+
+    var data = row[tdIndex].childNodes[1];
+
+    if (data) {
+      // update json after remove a col
+      var days = Object.keys(array);
+      var rows = document.getElementById("my-table").getElementsByTagName("tr");
+      for (let i = 1; i < rows.length; i++) {
+        let row = rows[i];
+        var cells = row.children;
+
+        for (let j = 0; j < cells.length; j++) {
+          var cell = cells[j];
+          if (cell === data.parentElement) {
+            array[days[j]][i - 1] = null;
+            break;
+          }
+        }
+      }
+
+      data.nextElementSibling.remove();
+      data.remove();
+      makeCellsDropable();
+      disableDropOnfirstRow();
+    }
+  }
+}
 
 function download() {
   let data = {
@@ -399,19 +405,17 @@ function download() {
     type: "application/json",
   });
   if (window.navigator.msSaveOrOpenBlob)
-    // IE10+
     window.navigator.msSaveOrOpenBlob(file, "table");
   else {
-    // Others
     var a = document.createElement("a"),
       url = URL.createObjectURL(file);
     a.href = url;
     a.download = "table";
-    document.body.appendChild(a);
     a.click();
-    setTimeout(function () {
-      document.body.removeChild(a);
-      window.URL.revokeObjectURL(url);
-    }, 0);
+    window.URL.revokeObjectURL(url);
   }
+}
+var fontWeight = document.querySelectorAll("td");
+for (let i = 0; i < 7; i++) {
+  fontWeight[i].setAttribute("style", "background-color: #f0a927");
 }
